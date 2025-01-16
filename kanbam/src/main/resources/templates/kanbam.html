@@ -91,14 +91,15 @@
         <div class="task">Task 1</div>
         <div class="task">Task 2</div>
         <div class="task">Task 3</div>
-        <button class="add-task">+ Add Task</button>
+
+        <button class="add-task" th:href="@{/form}">+ Add Task</button>
     </div>
 
     <div class="kanban-column">
         <h2>In Progress</h2>
         <div class="task">Task A</div>
         <div class="task">Task B</div>
-        <button class="add-task">+ Add Task</button>
+        <button class="add-task" th:href="@{/form}">+ Add Task</button>
     </div>
 
     <div class="kanban-column">
@@ -106,7 +107,7 @@
         <div class="task">Task X</div>
         <div class="task">Task Y</div>
         <div class="task">Task Z</div>
-        <button class="add-task">+ Add Task</button>
+        <button class="add-task" th:href="@{/form}">+ Add Task</button>
     </div>
 </div>
 </body>

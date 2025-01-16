@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:method="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar Nova Tarefa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f5f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e1e4e8;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: none;
+        }
+
+        .form-group select {
+            background-color: #f9f9f9;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-actions button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .form-actions button:hover {
+            background-color: #0056b3;
+        }
+
+        .form-actions button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Adicionar Nova Tarefa</h1>
+    <form th:action="@{/SubmitTask}" method="post" th:object="${task}">
+        <!-- Título -->
+        <div class="form-group">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" placeholder="Type your Task!" required th:field="*{name}">
+        </div>
+
+        <!-- Descrição -->
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="4" placeholder="Describe your task" required th:field="*{description}"></textarea>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required th:field="*{status}">
+                <option value="" disabled selected>Selecione o status</option>
+                <option value="TODO">A Fazer</option>
+                <option value="IN_PROGRESS">Em Andamento</option>
+                <option value="DONE">Concluído</option>
+            </select>
+        </div>
+
+        <!-- Botão -->
+        <div class="form-actions">
+            <button type="submit">Adicionar Tarefa</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
