@@ -86,12 +86,9 @@
 <body>
 <div class="kanban-container">
 
-    <div class="kanban-column">
+    <div class="kanban-column" th:each="task : ${tasks}">
         <h2>To Do</h2>
-        <div class="task">Task 1</div>
-        <div class="task">Task 2</div>
-        <div class="task">Task 3</div>
-
+        <div class="task" th:text="${task.name}"></div>
         <button class="add-task" th:href="@{/form}">+ Add Task</button>
     </div>
 

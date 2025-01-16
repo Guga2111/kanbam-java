@@ -46,4 +46,13 @@ public class KanbamService {
         int index = getIndexFromId(id);
         return index == Constants.NOT_FOUND ? new Task() : getTask(index);
     }
+
+    public void submitTask(Task task) {
+
+        addTask(task);
+    }
+
+    public void spreadingTasks(List<Task> taskList, List<Task> toDo, List<Task> doing, List<Task> Done) {
+
+    }
 }
