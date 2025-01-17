@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class KanbamController {
@@ -26,9 +27,13 @@ public class KanbamController {
         for(Task task : kanbamService.getTasks()) {
             System.out.println(task.getName());
             System.out.println(task.getId());
+            System.out.println(task.getStatus());
         }
 
-        model.addAttribute("tasks", kanbamService.getTasks());
+        kanbamService.spreadingTasks(kanbamService.getTasks());
+
+        Map<String, List<Task>> taskCollection = kanbamService.createTaskCollection();
+        model.addAllAttributes(taskCollection);
 
         return "kanbam";
     }
