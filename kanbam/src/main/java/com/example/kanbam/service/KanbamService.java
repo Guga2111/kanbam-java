@@ -74,33 +74,14 @@ public class KanbamService {
     }
 
     public void submitTask(Task task) {
-
         addTask(task);
     }
 
-    public void spreadingTasks(List<Task> taskList) {
-
-        if (taskList == null || taskList.isEmpty()) {
-            throw new IllegalArgumentException("The task list cannot be empty or null");
-        }
-
-        for(Task task : taskList) {
-            Status status = task.getStatus();
-
-            if (status == null) {
-                throw new IllegalArgumentException("Status invalid");
-            }
-
-            switch (status){
-                case TODO -> addToDoTask(task);
-                case IN_PROGRESS -> addDoingTask(task);
-                case DONE -> addDoneTask(task);
-                default -> throw new IllegalStateException("Unknown status: " + status);
-            }
-        }
+    public void spreadingTasks() {
+        kanbamRepository.spreadingTasks();
     }
 
-    public Map<String, List<Task>> createTaskCollection() {
+    public Map<String, List<Task>> createTaskCollection(List<Task> taskList) {
         return kanbamRepository.createTaskCollection();
     }
 }

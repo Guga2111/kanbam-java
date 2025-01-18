@@ -24,15 +24,22 @@ public class KanbamController {
     public String getKanbam(Model model) {
 
         //manual testing
+        /*
         for(Task task : kanbamService.getTasks()) {
+            System.out.println(task.getName());
+            System.out.println(task.getId());
+            System.out.println(task.getStatus());
+        } */
+
+        kanbamService.spreadingTasks();
+
+        for(Task task : kanbamService.getToDo()) {
             System.out.println(task.getName());
             System.out.println(task.getId());
             System.out.println(task.getStatus());
         }
 
-        kanbamService.spreadingTasks(kanbamService.getTasks());
-
-        Map<String, List<Task>> taskCollection = kanbamService.createTaskCollection();
+        Map<String, List<Task>> taskCollection = kanbamService.createTaskCollection(kanbamService.getTasks());
         model.addAllAttributes(taskCollection);
 
         return "kanbam";

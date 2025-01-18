@@ -86,26 +86,31 @@
 <body>
 <div class="kanban-container">
 
-    <div class="kanban-column" th:each="task : ${tasks}">
+    <div class="kanban-column">
         <h2>To Do</h2>
-        <div class="task" th:text="${task.name}"></div>
+        <div class="task" th:each="task : ${toDo}">
+            <span th:text="${task.name}"></span>
+        </div>
         <button class="add-task" th:href="@{/form}">+ Add Task</button>
     </div>
 
     <div class="kanban-column">
         <h2>In Progress</h2>
-        <div class="task">Task A</div>
-        <div class="task">Task B</div>
+        <div class="task" th:each="task : ${doing}">
+            <span th:text="${task.name}"></span>
+        </div>
         <button class="add-task" th:href="@{/form}">+ Add Task</button>
     </div>
 
     <div class="kanban-column">
         <h2>Done</h2>
-        <div class="task">Task X</div>
-        <div class="task">Task Y</div>
-        <div class="task">Task Z</div>
+        <div class="task" th:each="task : ${done}">
+            <span th:text="${task.name}"></span>
+        </div>
         <button class="add-task" th:href="@{/form}">+ Add Task</button>
     </div>
+
 </div>
+
 </body>
 </html>
