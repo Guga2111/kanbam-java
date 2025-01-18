@@ -72,6 +72,10 @@ public class KanbamRepository {
             throw new IllegalArgumentException("The task list cannot be empty or null");
         }
 
+        toDo.clear();
+        doing.clear();
+        done.clear();
+
         for(Task task : taskList) {
             Status status = task.getStatus();
 
