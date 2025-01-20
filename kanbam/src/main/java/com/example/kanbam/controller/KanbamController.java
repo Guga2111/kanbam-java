@@ -60,4 +60,13 @@ public class KanbamController {
         return "redirect:/";
     }
 
+    @GetMapping("/task/{id}")
+    public String getTask(Model model, @RequestParam(required = false) String id) {
+
+        if(id == null) return "redirect:/";
+
+        model.addAttribute("task", kanbamService.getTaskById(id));
+        return "task";
+    }
+
 }

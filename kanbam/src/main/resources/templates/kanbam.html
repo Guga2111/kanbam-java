@@ -53,7 +53,6 @@
             margin-bottom: 10px;
             font-size: 14px;
             color: #555;
-            cursor: grab;
             transition: transform 0.2s;
         }
 
@@ -81,6 +80,12 @@
         .add-task:focus {
             outline: none;
         }
+
+        .task a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -89,28 +94,27 @@
     <div class="kanban-column">
         <h2>To Do</h2>
         <div class="task" th:each="task : ${toDo}">
-            <span th:text="${task.name}"></span>
+            <a th:href="@{/task/{id}(id=${task.id})}" th:text="${task.name}"></a>
         </div>
-        <button class="add-task" th:href="@{/form}">+ Add Task</button>
+        <a class="add-task btn" th:href="@{/form}">+ Add Task</a>
     </div>
 
     <div class="kanban-column">
         <h2>In Progress</h2>
         <div class="task" th:each="task : ${doing}">
-            <span th:text="${task.name}"></span>
+            <a th:href="@{/task/{id}(id=${task.id})}" th:text="${task.name}"></a>
         </div>
-        <button class="add-task" th:href="@{/form}">+ Add Task</button>
+        <a class="add-task btn" th:href="@{/form}">+ Add Task</a>
     </div>
 
     <div class="kanban-column">
         <h2>Done</h2>
         <div class="task" th:each="task : ${done}">
-            <span th:text="${task.name}"></span>
+            <a th:href="@{/task/{id}(id=${task.id})}" th:text="${task.name}"></a>
         </div>
-        <button class="add-task" th:href="@{/form}">+ Add Task</button>
+        <a class="add-task btn" th:href="@{/form}">+ Add Task</a>
     </div>
 
 </div>
-
 </body>
 </html>

@@ -14,20 +14,30 @@ public class Task {
     private String description;
 
     private Status status;
+    private Priority priority;
 
     private LocalDate createDate;
     private LocalDate conclusionDate;
 
-    public Task(String name, String description, Status status, LocalDate createDate) {
+    public Task(String name, String description, Status status,Priority priority, LocalDate createDate) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
         this.status = status;
         this.createDate = createDate;
+        this.priority = priority;
     }
 
     public Task() {
         this.id = UUID.randomUUID().toString();
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
     public String getId() {
