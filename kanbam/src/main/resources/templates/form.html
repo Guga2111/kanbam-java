@@ -90,19 +90,17 @@
 <div class="form-container">
     <h1>Adicionar Nova Tarefa</h1>
     <form th:action="@{/SubmitTask}" method="post" th:object="${task}">
-        <!-- Título -->
+
         <div class="form-group">
             <label for="titulo">Título</label>
             <input type="text" id="titulo" name="titulo" placeholder="Type your Task!" required th:field="*{name}">
         </div>
 
-        <!-- Descrição -->
         <div class="form-group">
             <label for="descricao">Descrição</label>
             <textarea id="descricao" name="descricao" rows="4" placeholder="Describe your task" required th:field="*{description}"></textarea>
         </div>
 
-        <!-- Status -->
         <div class="form-group">
             <label for="status">Status</label>
             <select id="status" name="status" required th:field="*{status}">
@@ -123,7 +121,6 @@
             </select>
         </div>
 
-        <!-- Botão -->
         <div class="form-actions">
             <input type="hidden" th:field="*{id}">
             <input type="submit" value="Submit Item">
