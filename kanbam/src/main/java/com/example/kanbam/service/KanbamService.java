@@ -84,4 +84,19 @@ public class KanbamService {
     public Map<String, List<Task>> createTaskCollection(List<Task> taskList) {
         return kanbamRepository.createTaskCollection();
     }
+
+    public void submitChange(Task task) {
+
+        Status status = task.getStatus();
+
+        if (status == null) {
+            throw new IllegalArgumentException("Status invalid");
+        }
+
+        switch (status) {
+            case TODO -> task.setStatus(Status.IN_PROGRESS);
+            case IN_PROGRESS -> task.setStatus(Status.DONE);
+            default -> throw new IllegalStateException("Unknown status: " + status);
+        }
+    }
 }

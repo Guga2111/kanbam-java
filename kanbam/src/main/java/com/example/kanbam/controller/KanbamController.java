@@ -34,12 +34,6 @@ public class KanbamController {
 
         kanbamService.spreadingTasks();
 
-        for(Task task : kanbamService.getToDo()) {
-            System.out.println(task.getName());
-            System.out.println(task.getId());
-            System.out.println(task.getStatus());
-        }
-
         Map<String, List<Task>> taskCollection = kanbamService.createTaskCollection(kanbamService.getTasks());
         model.addAllAttributes(taskCollection);
 
@@ -68,6 +62,25 @@ public class KanbamController {
 
         model.addAttribute("task", kanbamService.getTaskById(id));
         return "task";
+    }
+
+    @PostMapping("/taskchange/{id}")
+    public String submitChange(@PathVariable String id) {
+
+        System.out.println("Received ID: " + id);
+
+        Task task = kanbamService.getTaskById(id);
+
+        if(task == null) return "redirect:/";
+
+        try {
+            kanbamService.submitChange(task);
+        } catch (Exception e) {
+            System.err.println("Error submitting task change: " + e.getMessage());
+            e.printStackTrace();
+            return "redirect:/"; // Redirecione para uma página de erro, se necessário
+        }
+        return "redirect:/";
     }
 
 }

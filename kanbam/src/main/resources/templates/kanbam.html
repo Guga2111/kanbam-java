@@ -45,7 +45,8 @@
             color: #333;
         }
 
-        .kanban-column .task {
+        .task {
+            position: relative;
             background-color: #ffffff;
             border: 1px solid #e1e4e8;
             border-radius: 5px;
@@ -53,12 +54,29 @@
             margin-bottom: 10px;
             font-size: 14px;
             color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             transition: transform 0.2s;
         }
 
-        .kanban-column .task:hover {
+        .task:hover {
             background-color: #edf2f7;
             transform: scale(1.02);
+        }
+
+        .task-arrow {
+            font-size: 16px;
+            color: #555;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .task:hover .task-arrow {
+            opacity: 1;
+            transform: translateX(5px);
         }
 
         .add-task {
@@ -80,12 +98,6 @@
         .add-task:focus {
             outline: none;
         }
-
-        .task a {
-            text-decoration: none;
-            color: inherit;
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
@@ -95,6 +107,13 @@
         <h2>To Do</h2>
         <div class="task" th:each="task : ${toDo}">
             <a th:href="@{/task/{id}(id=${task.id})}" th:text="${task.name}"></a>
+            <div>
+                <form action="#" th:action="@{/taskchange/{id}(id=${task.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="task-arrow" style="background: none; border: none; cursor: pointer; padding: 0; font-size: 16px; color: inherit;">
+                        ➔
+                    </button>
+                </form>
+            </div>
         </div>
         <a class="add-task btn" th:href="@{/form}">+ Add Task</a>
     </div>
@@ -103,6 +122,14 @@
         <h2>In Progress</h2>
         <div class="task" th:each="task : ${doing}">
             <a th:href="@{/task/{id}(id=${task.id})}" th:text="${task.name}"></a>
+            <div>
+                <form action="#" th:action="@{/taskchange/{id}(id=${task.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="task-arrow" style="background: none; border: none; cursor: pointer; padding: 0; font-size: 16px; color: inherit;">
+                        ➔
+                    </button>
+                </form>
+            </div>
+
         </div>
         <a class="add-task btn" th:href="@{/form}">+ Add Task</a>
     </div>
