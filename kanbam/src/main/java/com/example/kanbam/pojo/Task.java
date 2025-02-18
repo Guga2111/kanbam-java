@@ -1,6 +1,7 @@
 package com.example.kanbam.pojo;
 
 import ch.qos.logback.core.status.StatusUtil;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
@@ -10,7 +11,9 @@ public class Task {
 
     private String id;
 
+    @NotBlank(message = "Name can't be blank!")
     private String name;
+    @NotBlank(message = "Description can't be blank!")
     private String description;
 
     private Status status;

@@ -5,6 +5,7 @@ import com.example.kanbam.service.KanbamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,14 +33,13 @@ public class KanbamController {
 
     @GetMapping("/form")
     public String taskForm(Model model, @RequestParam(required = false) String id) {
-
         model.addAttribute("task", kanbamService.getTaskById(id));
         return "form";
     }
 
     @PostMapping("/SubmitTask")
-    public String submitForm(Task task) {
-
+    public String submitForm(Task task, BindingResult result) {
+        if(result.hasErrors()) return "form";
         kanbamService.submitTask(task);
 
         return "redirect:/";
