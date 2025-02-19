@@ -1,5 +1,6 @@
 package com.example.kanbam;
 
+import com.example.kanbam.Constants.Constants;
 import com.example.kanbam.pojo.Priority;
 import com.example.kanbam.pojo.Status;
 import com.example.kanbam.pojo.Task;
@@ -42,5 +43,21 @@ public class KanbamServiceTest {
         assertEquals("Estudar Testes", result.get(1).getName());
         assertEquals(Status.TODO, result.get(0).getStatus());
         assertEquals(LocalDate.now(), result.get(0).getCreateDate());
+    }
+
+    @Test
+    public void getIndexFromIdTest() {
+        when(kanbamRepository.getTasks()).thenReturn(Arrays.asList(
+                new Task("Estudar Java", "preciso estudar java", Status.TODO, Priority.HIGH, LocalDate.now()),
+                new Task("Estudar Testes", "unit testing", Status.IN_PROGRESS, Priority.HIGH, LocalDate.now())
+        ));
+
+        List<Task> result = kanbamService.getTasks();
+
+        int valid = kanbamService.getIndexFromId(result.get(0).getId());
+        int notValid = kanbamService.getIndexFromId("123");
+
+        assertEquals(0, valid);
+        assertEquals(Constants.NOT_FOUND, notValid);
     }
 }

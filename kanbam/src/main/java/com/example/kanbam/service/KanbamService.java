@@ -62,7 +62,7 @@ public class KanbamService {
 
     public int getIndexFromId(String id) {
         for(int i = 0; i < getTasks().size(); i++) {
-            Task task = getTask(i);
+            Task task = getTasks().get(i);
             if(task.getId().equals(id)) return i;
         }
         return Constants.NOT_FOUND;
