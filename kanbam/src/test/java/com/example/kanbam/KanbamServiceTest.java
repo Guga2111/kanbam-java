@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -68,5 +69,17 @@ public class KanbamServiceTest {
         Task task = kanbamService.getTask(0);
 
         assertEquals("Estudar Testes", task.getName());
+    }
+
+    @Test
+    public void getTaskByIdTest() {
+        KanbamService spyService = spy(kanbamService);
+        when(spyService.getIndexFromId("123")).thenReturn(0);
+
+        when(kanbamRepository.getTask(0)).thenReturn(new Task("Estudar Java", "preciso estudar java", Status.TODO, Priority.HIGH, LocalDate.now()));
+
+        Task result = spyService.getTaskById("123");
+
+        assertEquals("Estudar Java", result.getName());
     }
 }
