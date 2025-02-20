@@ -60,4 +60,13 @@ public class KanbamServiceTest {
         assertEquals(0, valid);
         assertEquals(Constants.NOT_FOUND, notValid);
     }
+
+    @Test
+    public void getTaskTest() {
+        when(kanbamRepository.getTask(0)).thenReturn(new Task("Estudar Testes", "JUnit", Status.TODO, Priority.HIGH, LocalDate.now()));
+
+        Task task = kanbamService.getTask(0);
+
+        assertEquals("Estudar Testes", task.getName());
+    }
 }
