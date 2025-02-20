@@ -82,4 +82,20 @@ public class KanbamServiceTest {
 
         assertEquals("Estudar Java", result.getName());
     }
+
+    @Test
+    public void submitChangeTest() {
+        List<Task> tasks = Arrays.asList(
+              new Task("ToDO", "A fazer", Status.TODO, Priority.HIGH, LocalDate.now()),
+              new Task("InProgress", "Em progresso", Status.IN_PROGRESS, Priority.HIGH, LocalDate.now()),
+              new Task("Done", "Feito", Status.DONE, Priority.HIGH, LocalDate.now())
+        );
+
+        assertEquals(Status.TODO, tasks.get(0).getStatus());
+
+        kanbamService.submitChange(tasks.get(0));
+
+        assertEquals(Status.IN_PROGRESS,tasks.get(0).getStatus());
+
+    }
 }
