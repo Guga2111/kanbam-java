@@ -2,6 +2,8 @@ package com.example.kanbam;
 
 import com.example.kanbam.pojo.Priority;
 import com.example.kanbam.pojo.Status;
+import com.example.kanbam.pojo.Task;
+import com.example.kanbam.service.KanbamService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +25,8 @@ class KanbamApplicationTests {
 
 	@Autowired
 	private MockMvc mockMvc;
+    @Autowired
+    private KanbamService kanbamService;
 
 	@Test
 	void contextLoads() {
@@ -64,8 +68,23 @@ class KanbamApplicationTests {
 	}
 
 	@Test
-	public void testGetKanbanForm() throws Exception{
-		RequestBuilder request = MockMvcRequestBuilders.get("/form");
+	public void testGetKanbanForm() throws Exception {
+		RequestBuilder request = MockMvcRequestBuilders.get("/form")
+				.param("id", "123");
 
+		mockMvc.perform(request)
+				.andExpect(status().is2xxSuccessful())
+				.andExpect(model().attributeExists("task"))
+				.andExpect(view().name("form"));
+
+	}
+
+	@Test
+	public void testSubmitChange() throws Exception {
+		RequestBuilder request = MockMvcRequestBuilders.post("/taskchange/123");
+
+		mockMvc.perform(request)
+				.andExpect(status().is3xxRedirection())
+				.andExpect(redirectedUrl("/"));
 	}
 }
