@@ -1,89 +1,50 @@
 package com.example.kanbam.pojo;
 
 import ch.qos.logback.core.status.StatusUtil;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import org.springframework.cglib.core.Local;
+import lombok.*;
+
 
 import java.time.LocalDate;
-import java.util.UUID;
 
+
+@Getter
+@Setter
+@RequiredArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "task")
 public class Task {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Name can't be blank!")
+    @NonNull
+    @Column(name = "name")
     private String name;
+
     @NotBlank(message = "Description can't be blank!")
+    @NonNull
+    @Column(name = "description")
     private String description;
 
+    @NonNull
+    @Column(name = "status")
     private Status status;
+
+    @NonNull
+    @Column(name = "priority")
     private Priority priority;
 
+    @NonNull
+    @Column(name = "createDate")
     private LocalDate createDate;
+
+    @NonNull
+    @Column(name = "conclusionDate")
     private LocalDate conclusionDate;
 
-    public Task(String name, String description, Status status,Priority priority, LocalDate createDate) {
-        this.id = UUID.randomUUID().toString();
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.createDate = createDate;
-        this.priority = priority;
-    }
-
-    public Task() {
-        this.id = UUID.randomUUID().toString();
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public LocalDate getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(LocalDate createDate) {
-        this.createDate = createDate;
-    }
-
-    public LocalDate getConclusionDate() {
-        return conclusionDate;
-    }
-
-    public void setConclusionDate(LocalDate conclusionDate) {
-        this.conclusionDate = conclusionDate;
-    }
 }

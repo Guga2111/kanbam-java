@@ -1,76 +1,47 @@
 package com.example.kanbam.controller;
 
+import com.example.kanbam.pojo.Status;
 import com.example.kanbam.pojo.Task;
 import com.example.kanbam.service.KanbamService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
-@Controller
+@AllArgsConstructor
+@RestController
+@RequestMapping("/task")
 public class KanbamController {
 
-    @Autowired
     KanbamService kanbamService;
 
-    @GetMapping("/")
-    public String getKanbam(Model model) {
-
-        kanbamService.spreadingTasks();
-
-        Map<String, List<Task>> taskCollection = kanbamService.createTaskCollection(kanbamService.getTasks());
-        model.addAllAttributes(taskCollection);
-
-        return "kanbam";
+    @GetMapping("/all")
+    public ResponseEntity<List<Task>> getKanbam() {
+        List<Task> tasks = kanbamService.getTasks();
+        return new ResponseEntity(tasks, HttpStatus.OK);
     }
 
-    @GetMapping("/form")
-    public String taskForm(Model model, @RequestParam(required = false) String id) {
-        model.addAttribute("task", kanbamService.getTaskById(id));
-        return "form";
+    @GetMapping("/{id}")
+    public ResponseEntity<Task> getTask(@PathVariable Long id) {
+        Task task = kanbamService.getTask(id);
+        return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
-    @PostMapping("/SubmitTask")
-    public String submitForm(Task task, BindingResult result) {
-        if(result.hasErrors()) return "form";
-        kanbamService.submitTask(task);
-
-        return "redirect:/";
+    @PostMapping
+    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
+        return new ResponseEntity<>(kanbamService.saveTask(task), HttpStatus.CREATED);
     }
 
-    @GetMapping("/task/{id}")
-    public String getTask(Model model, @PathVariable String id) {
-
-        if(id == null) return "redirect:/";
-
-        model.addAttribute("task", kanbamService.getTaskById(id));
-        return "task";
+    @PutMapping("/{id}")
+    public ResponseEntity<Task> updateTask(Status status, @PathVariable Long id) {
+        return new ResponseEntity<>(kanbamService.updateTask(status, id), HttpStatus.OK);
     }
 
-    @PostMapping("/taskchange/{id}")
-    public String submitChange(@PathVariable String id) {
-
-        System.out.println("Received ID: " + id);
-
-        Task task = kanbamService.getTaskById(id);
-
-        if(task == null) return "redirect:/";
-
-        try {
-            kanbamService.submitChange(task);
-        } catch (Exception e) {
-            System.err.println("Error submitting task change: " + e.getMessage());
-            e.printStackTrace();
-            return "redirect:/";
-        }
-        return "redirect:/";
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Task> deleteTask(@PathVariable Long id) {
+        kanbamService.deleteTask(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
 }
