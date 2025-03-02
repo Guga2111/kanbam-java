@@ -4,16 +4,17 @@ import com.example.kanbam.Constants.Constants;
 import com.example.kanbam.pojo.Status;
 import com.example.kanbam.pojo.Task;
 import com.example.kanbam.repository.KanbamRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 public class KanbamService {
 
-    @Autowired
     KanbamRepository kanbamRepository;
 
     public List<Task> getTasks() {
