@@ -35,7 +35,7 @@ public class KanbamService {
 
     public Task updateTask(Status status, Long id) {
         Task task = getTask(id);
-        task.setStatus(status);
+
         return kanbamRepository.save(task);
     }
 }
