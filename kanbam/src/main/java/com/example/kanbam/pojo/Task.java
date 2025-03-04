@@ -1,6 +1,5 @@
 package com.example.kanbam.pojo;
 
-import ch.qos.logback.core.status.StatusUtil;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import com.example.kanbam.pojo.Status;
@@ -25,7 +24,7 @@ public class Task {
 
     @NotBlank(message = "Name can't be blank!")
     @NonNull
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotBlank(message = "Description can't be blank!")
@@ -33,21 +32,17 @@ public class Task {
     @Column(name = "description")
     private String description;
 
-    @NonNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private Status status;
 
-    @NonNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "priority")
+    @Column(name = "priority", nullable = false)
     private Priority priority;
 
-    @NonNull
-    @Column(name = "createDate")
-    private LocalDate createDate;
+    @Column(name = "createDate", updatable = false)
+    private LocalDate createDate = LocalDate.now();
 
-    @NonNull
     @Column(name = "conclusionDate")
     private LocalDate conclusionDate;
 
