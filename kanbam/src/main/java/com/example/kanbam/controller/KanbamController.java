@@ -33,12 +33,12 @@ public class KanbamController {
 
     @PostMapping
     public ResponseEntity<Task> saveTask(@RequestBody Task task) {
-        return new ResponseEntity<>(kanbamService.saveTask(task, task.getPriority().toString()), HttpStatus.CREATED);
+        return new ResponseEntity<>(kanbamService.saveTask(task), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@RequestBody Task task, @Valid @PathVariable Long id) {
-        return new ResponseEntity<>(kanbamService.updateTask(task.getStatus().toString(), task.getPriority().toString(), id), HttpStatus.OK);
+        return new ResponseEntity<>(kanbamService.updateTask(task.getStatus(), task.getPriority(), id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

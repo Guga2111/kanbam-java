@@ -45,5 +45,4 @@ public class Task {
 
     @Column(name = "conclusionDate")
     private LocalDate conclusionDate;
-
 }
