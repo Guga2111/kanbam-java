@@ -1,9 +1,7 @@
-package com.example.kanbam.pojo;
+package com.example.kanbam.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import com.example.kanbam.pojo.Status;
-import com.example.kanbam.pojo.Priority;
 import lombok.*;
 
 

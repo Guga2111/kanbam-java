@@ -1,12 +1,12 @@
 package com.example.kanbam.controller;
 
-import com.example.kanbam.pojo.Status;
-import com.example.kanbam.pojo.Task;
+import com.example.kanbam.entity.Task;
 import com.example.kanbam.service.KanbamService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/task")
 public class KanbamController {
 
+    @Autowired
     KanbamService kanbamService;
 
     @GetMapping("/all")

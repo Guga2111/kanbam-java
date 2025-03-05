@@ -3,9 +3,9 @@ package com.example.kanbam.service;
 
 import com.example.kanbam.exception.EnumIncorretFormatException;
 import com.example.kanbam.exception.TaskNotFoundException;
-import com.example.kanbam.pojo.Priority;
-import com.example.kanbam.pojo.Status;
-import com.example.kanbam.pojo.Task;
+import com.example.kanbam.entity.Priority;
+import com.example.kanbam.entity.Status;
+import com.example.kanbam.entity.Task;
 import com.example.kanbam.repository.KanbamRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -73,8 +73,8 @@ public class KanbamService {
                 Priority.HIGH
         );
 
-        if(!statusList.contains(task.getStatus())) throw new EnumIncorretFormatException();
+        if(!statusList.contains(task.getStatus())) throw new EnumIncorretFormatException("Not exist in the pattern pre set");
 
-        if(!priorityList.contains(task.getPriority())) throw new EnumIncorretFormatException();
+        if(!priorityList.contains(task.getPriority())) throw new EnumIncorretFormatException("Not exist in the pattern pre set");
     }
 }

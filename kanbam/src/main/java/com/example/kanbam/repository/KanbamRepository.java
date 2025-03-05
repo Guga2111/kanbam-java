@@ -1,6 +1,6 @@
 package com.example.kanbam.repository;
 
-import com.example.kanbam.pojo.Task;
+import com.example.kanbam.entity.Task;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
