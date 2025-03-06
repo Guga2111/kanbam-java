@@ -49,7 +49,7 @@ public class KanbamApplication {
 	private static boolean isDatabaseReady() {
 		try {
 			Process process = new ProcessBuilder(
-					"docker", "exec", "meu-mysql-container", "mysqladmin", "ping", "-h", "localhost"
+					"docker", "exec", "docker-db-1", "mysqladmin", "ping", "-h", "localhost"
 			).start();
 			return process.waitFor() == 0;
 		} catch (IOException | InterruptedException e) {
