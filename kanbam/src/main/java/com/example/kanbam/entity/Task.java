@@ -2,6 +2,7 @@ package com.example.kanbam.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 
@@ -21,6 +22,7 @@ public class Task {
     private Long id;
 
     @NotBlank(message = "Name can't be blank!")
+    @Size(max = 30, message = "Your name must be less than 30 characters")
     @NonNull
     @Column(name = "name", nullable = false)
     private String name;
@@ -43,4 +45,8 @@ public class Task {
 
     @Column(name = "conclusionDate")
     private LocalDate conclusionDate;
+
+    @ManyToOne
+    @JoinColumn(name = "board_id", referencedColumnName = "id")
+    private Board board;
 }

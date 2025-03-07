@@ -6,7 +6,7 @@ import com.example.kanbam.exception.TaskNotFoundException;
 import com.example.kanbam.entity.Priority;
 import com.example.kanbam.entity.Status;
 import com.example.kanbam.entity.Task;
-import com.example.kanbam.repository.KanbamRepository;
+import com.example.kanbam.repository.TaskRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +17,9 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Service
-public class KanbamService {
+public class TaskService {
 
-    KanbamRepository kanbamRepository;
+    TaskRepository kanbamRepository;
 
     public List<Task> getTasks() {
         return (List<Task>) kanbamRepository.findAll();
