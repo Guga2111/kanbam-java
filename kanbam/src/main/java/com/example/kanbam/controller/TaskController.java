@@ -18,7 +18,7 @@ public class TaskController {
 
     TaskService kanbamService;
 
-    @GetMapping("/all")
+    @GetMapping("/all/{id}")
     public ResponseEntity<List<Task>> getTasks() {
         List<Task> tasks = kanbamService.getTasks();
         return new ResponseEntity(tasks, HttpStatus.OK);
@@ -30,9 +30,9 @@ public class TaskController {
         return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Task> saveTask(@RequestBody Task task) {
-        return new ResponseEntity<>(kanbamService.saveTask(task), HttpStatus.CREATED);
+    @PostMapping("/{boardId}")
+    public ResponseEntity<Task> saveTask(@RequestBody Task task, @PathVariable Long boardId) {
+        return new ResponseEntity<>(kanbamService.saveTask(task, boardId), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

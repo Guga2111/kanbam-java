@@ -46,7 +46,7 @@ public class Task {
     @Column(name = "conclusionDate")
     private LocalDate conclusionDate;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "board_id", referencedColumnName = "id")
     private Board board;
 }

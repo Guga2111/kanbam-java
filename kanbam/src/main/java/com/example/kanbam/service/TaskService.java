@@ -1,11 +1,13 @@
 package com.example.kanbam.service;
 
 
+import com.example.kanbam.entity.Board;
 import com.example.kanbam.exception.EnumIncorretFormatException;
 import com.example.kanbam.exception.TaskNotFoundException;
 import com.example.kanbam.entity.Priority;
 import com.example.kanbam.entity.Status;
 import com.example.kanbam.entity.Task;
+import com.example.kanbam.repository.BoardRepository;
 import com.example.kanbam.repository.TaskRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,8 @@ public class TaskService {
 
     TaskRepository kanbamRepository;
 
+    BoardRepository boardRepository;
+
     public List<Task> getTasks() {
         return (List<Task>) kanbamRepository.findAll();
     }
@@ -31,8 +35,10 @@ public class TaskService {
     }
 
     //resolver bug nessa funcao
-    public Task saveTask(Task task) {
+    public Task saveTask(Task task, Long boardId) {
         enumCorrectFormatCheck(task);
+        Board board = boardRepository.findById(boardId).get();
+        task.setBoard(board);
         return kanbamRepository.save(task);
     }
 
