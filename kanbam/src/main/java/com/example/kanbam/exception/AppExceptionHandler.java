@@ -23,6 +23,12 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getLocalizedMessage()));
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
     @ExceptionHandler(EnumIncorretFormatException.class)
     public ResponseEntity<Object> handleEnumIncorrectFormatException(EnumIncorretFormatException ex) {
         ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getLocalizedMessage()));
