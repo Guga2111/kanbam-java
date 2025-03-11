@@ -28,11 +28,10 @@ public class User {
 
     @NonNull
     @NotBlank
-    @Min(value = 8, message = "Must have at least 8 digits!")
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Board> boards;
 
     //Func that i've created for hashing the password and empowering the security of the users!
