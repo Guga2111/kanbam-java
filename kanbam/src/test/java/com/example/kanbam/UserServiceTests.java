@@ -74,5 +74,25 @@ public class UserServiceTests {
         verify(userRepository, times(1)).save(user);
     }
 
+    @Test
+    public void deleteUserFromRepoTest() {
+        Long id = 1L;
 
+        userService.deleteUser(id);
+
+        verify(userRepository, times(1)).deleteById(id);
+    }
+
+    @Test
+    public void updateUserFromRepoTest() {
+        Long id = 1L;
+        when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(userRepository.save(user)).thenReturn(user);
+
+        User result = userService.updateUser(id);
+
+        assertEquals("testemail@gmail.com", result.getEmail());
+        assertEquals("testpassword123", result.getPassword());
+        verify(userRepository, times(1)).save(user);
+    }
 }
