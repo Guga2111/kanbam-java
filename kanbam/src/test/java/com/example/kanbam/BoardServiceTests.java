@@ -70,9 +70,9 @@ public class BoardServiceTests {
         when(boardRepository.findById(id)).thenReturn(Optional.of(board));
         when(boardRepository.save(board)).thenReturn(board);
 
-        Board result = boardService.updateBoard("KanbamTestBoard", id);
+        Board result = boardService.updateBoard("KanbamTestBoard123", id);
 
-        assertEquals("KanbamTestBoard", result.getName());
+        assertEquals("KanbamTestBoard123", result.getName());
         verify(boardRepository, times(1)).save(board);
     }
 

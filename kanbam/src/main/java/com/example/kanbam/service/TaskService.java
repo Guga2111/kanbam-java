@@ -21,16 +21,16 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
-    TaskRepository kanbamRepository;
+    TaskRepository taskRepository;
 
     BoardRepository boardRepository;
 
     public List<Task> getTasks() {
-        return (List<Task>) kanbamRepository.findAll();
+        return (List<Task>) taskRepository.findAll();
     }
 
     public Task getTask(Long id) {
-        Optional<Task> task = kanbamRepository.findById(id);
+        Optional<Task> task = taskRepository.findById(id);
         return unwrapTask(task, id);
     }
 
@@ -39,22 +39,22 @@ public class TaskService {
         enumCorrectFormatCheck(task);
         Board board = boardRepository.findById(boardId).get();
         task.setBoard(board);
-        return kanbamRepository.save(task);
+        return taskRepository.save(task);
     }
 
     public void deleteTask(Long id) {
-        kanbamRepository.deleteById(id);
+        taskRepository.deleteById(id);
     }
 
     public Task updateTask(Status status, Priority priority, Long id) {
-        Optional<Task> task = kanbamRepository.findById(id);
+        Optional<Task> task = taskRepository.findById(id);
         Task unwrappedTask = unwrapTask(task, id);
 
         unwrappedTask.setStatus(status);
         unwrappedTask.setPriority(priority);
         statusDoneCheck(status, unwrappedTask);
 
-        return kanbamRepository.save(unwrappedTask);
+        return taskRepository.save(unwrappedTask);
     }
 
     static Task unwrapTask(Optional<Task> entity, Long id) {
