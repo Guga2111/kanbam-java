@@ -38,7 +38,6 @@ public class UserServiceTests {
         user.setId(1L);
         user.setEmail("testemail@gmail.com");
         user.setPassword("testpassword123");
-
     }
 
     @Test

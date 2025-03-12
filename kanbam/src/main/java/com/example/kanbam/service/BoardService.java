@@ -36,7 +36,7 @@ public class BoardService {
         Optional<Board> board = boardRepository.findById(id);
         Board unwrapBoard = unwrapBoard(board, id);
         unwrapBoard.setName(name);
-        return unwrapBoard;
+        return boardRepository.save(unwrapBoard);
     }
 
     static Board unwrapBoard(Optional<Board> entity, Long id) {
