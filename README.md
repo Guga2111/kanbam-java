@@ -7,10 +7,14 @@ This is a Kanban board project developed with Spring Boot.
 - **Spring Boot**
 - **JUnit** for testing
 - **Mockito** for dependency mocking
-- **Spring MVC** for project structure
+- **RestAPI** for project structure
+- **MySQL** for db
+- **Docker** for containerize the db
+- **JPA** to launch hibernate
+- **Liquibase** to manage db versions
 
 ## Project Structure
-The project follows an MVC structure, organizing responsibilities between controllers, services, and models.
+The project follows an RestAPI structure, organizing responsibilities between controllers, services, and models.
 
 ## Setup and Execution
 1. Make sure you have **Java 17** installed.
@@ -27,14 +31,18 @@ mvn test
 ```
 
 ## Database
-Currently, the application is **not** connected to a database. This functionality is planned for future versions.
+Currently, the application have a container with docker to run the mySQL with a script in pure java to run automatically.
 
 ## Security
 **Spring Security** has **not** been implemented yet, but there are plans to add authentication and authorization in future versions.
 
 ## Main Endpoints
+- `GET /task/{id}` - Returns a task.
 - `GET /tasks` - Returns all tasks.
-- `POST /tasks` - Adds a new task.
+- `POST /tasks{courseId}` - Adds a new task.
+- `PUT /tasks/{id}` - Updates a task.
+- `DELETE /tasks{id}` - Deletes a task.
+#Same Endpoints for board and user, changing the id used.
 ---
 Still under development! 🚀
 
